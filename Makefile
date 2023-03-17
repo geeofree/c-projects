@@ -6,6 +6,7 @@ OBJECTS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SOURCES))
 
 CC := cc
 CFLAGS := -Wall -Werror -Wextra
+
 POSTCFLAGS := -lm
 
 TARGET := $(BUILD_DIR)/main
@@ -22,4 +23,7 @@ $(BUILD_DIR): ; mkdir -p $(BUILD_DIR)
 
 clean: ; rm -r $(BUILD_DIR)
 
-.PHONY: all clean
+debug: POSTCFLAGS += -g
+debug: all
+
+.PHONY: all clean debug

@@ -7,8 +7,12 @@ fi
 
 path=$(realpath "$1")
 
-if ! [ -z "$2" ] && [ "$2" = "clean" ]; then
-  make clean PROJECT_PATH="$path"
+if ! [ -z "$2" ]; then
+  if [ "$2" = "clean" ]; then
+    make clean PROJECT_PATH="$path"
+  elif [ "$2" = "debug" ]; then
+    make debug PROJECT_PATH="$path"
+  fi
 else
   make PROJECT_PATH="$path"
 fi

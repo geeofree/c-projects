@@ -7,6 +7,11 @@
 #include <unistd.h>
 #include <wait.h>
 
+/**
+  * Refactored version by Veenified (https://www.twitch.tv/veenified):
+  * https://pastebin.com/Yi0mX1YN
+  **/
+
 static unsigned int arg_str_len = DEFAULT_ARG_STR_LEN;
 static unsigned int args_len = 1;
 

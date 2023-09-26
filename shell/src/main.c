@@ -1,34 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "readline.h"
-#include "execute.h"
-
-#define MAX_LINE_BUFFER_LENGTH 128
+#include "shell.h"
 
 int main() {
-  printf("Welcome to the shell!\n");
-
-  char line_buf[MAX_LINE_BUFFER_LENGTH];
-  int line_length;
-
-  char *prompt = getenv("PROMPT");
-
+  char* prompt = getenv("PROMPT");
   if (prompt == NULL) {
     prompt = "$ ";
   }
 
+  printf("Welcome to the shell!\n");
   printf("%s", prompt);
-  while ((line_length = readline(line_buf, MAX_LINE_BUFFER_LENGTH)) != EOF) {
-    if (line_length >= MAX_LINE_BUFFER_LENGTH) {
-      fprintf(stderr, "ERROR: Input length exceeded max line buffer length.\n");
-      return EXIT_FAILURE;
-    }
 
-    execute(line_buf);
+  char* line = get_line();
+
+  while (read_line(&line) != EOF) {
+    exec_line(&line);
     printf("%s", prompt);
   }
-
-  if (line_length == EOF) printf("\n");
+  printf("\n");
 
   return EXIT_SUCCESS;
 }
